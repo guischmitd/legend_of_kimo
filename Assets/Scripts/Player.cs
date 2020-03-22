@@ -14,11 +14,14 @@ public class Player : MonoBehaviour
     public float moveAcc;
     public float airControlCoefficient;
     public float jumpForce;
-    public GameObject mainCam;
+    public float gravityMultiplier;
+
+    CharacterController controller;
 
     Rigidbody rb;
     void Awake()
     {
+        controller = GetComponent<CharacterController>();
         controls = new Controls();
         controls.Player.Move.performed += ctx => moveDirection = ctx.ReadValue<Vector2>();
         controls.Player.Jump.performed  += ctx => Jump();
@@ -27,7 +30,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+
         rb = GetComponent<Rigidbody>();
     }
     
@@ -36,13 +39,17 @@ public class Player : MonoBehaviour
     {
         // Debug.Log(moveDirection);
         // inputDirection = Vector3.Lerp(inputDirection, new Vector3(moveDirection.x, 0, moveDirection.y), Time.deltaTime * 10f);
-        Vector3 cameraForward = mainCam.transform.forward;
-        Vector3 cameraRight =  mainCam.transform.right;
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight =  Camera.main.transform.right;
         cameraForward.y = 0;
         cameraRight.y = 0;
 
         inputDirection = cameraForward * moveDirection.y + cameraRight * moveDirection.x;
         Move(inputDirection);
+        if (rb.velocity.y < -0.05f) 
+        {
+            rb.AddForce(Vector3.down * gravityMultiplier);
+        }
     }
 
     void Move(Vector3 desiredDirection)
@@ -51,16 +58,14 @@ public class Player : MonoBehaviour
         if (onGround)
         {
             movement.Set(desiredDirection.x, 0, desiredDirection.z);
-            movement *= moveAcc * Time.deltaTime;
+            movement *= moveAcc;
         } else {
             movement.Set(desiredDirection.x, 0, desiredDirection.z);
-            movement *= moveAcc * airControlCoefficient * Time.deltaTime;
+            movement *= moveAcc * airControlCoefficient;
         }
 
-        if (rb.velocity.magnitude <= maxSpeed)
-        {
-            rb.MovePosition(transform.position + movement);
-        }
+        movement = Vector3.Lerp(movement, Vector3.zero, rb.velocity.magnitude / maxSpeed);
+        rb.AddForce(movement);
     }
 
     void Jump()
@@ -69,19 +74,19 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
-        }   
+        }
     }
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "Ground")
+        if (col.gameObject.tag == "Ground")
         {
             onGround = true;
         }
     }
     void OnCollisionExit(Collision col)
     {
-        if (col.gameObject.name == "Ground")
+        if (col.gameObject.tag == "Ground")
         {
             onGround = false;
         }

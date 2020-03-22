@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public Controls controls;
     Vector2 moveDirection;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Debug.Log(moveDirection);
+        Debug.Log(moveDirection);
         // inputDirection = Vector3.Lerp(inputDirection, new Vector3(moveDirection.x, 0, moveDirection.y), Time.deltaTime * 10f);
         Vector3 cameraForward = mainCam.transform.forward;
         Vector3 cameraRight =  mainCam.transform.right;
@@ -56,10 +56,10 @@ public class Player : MonoBehaviour
             movement.Set(desiredDirection.x, 0, desiredDirection.z);
             movement *= moveAcc * airControlCoefficient * Time.deltaTime;
         }
-
+        // rb.AddForce(new Vector3(moveDirection.x, 0, moveDirection.y) * moveSpeed * Time.deltaTime);
         if (rb.velocity.magnitude <= maxSpeed)
         {
-            rb.MovePosition(transform.position + movement);
+            rb.AddForce(movement);
         }
     }
 
@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     {
         if (onGround)
         {
+            // Debug.Log("Kimo is on the ground");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
         }   

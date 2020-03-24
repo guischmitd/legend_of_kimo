@@ -17,8 +17,7 @@ public class enemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player.transform);
-        
+        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
     }
 
     IEnumerator Shoot()
@@ -27,7 +26,7 @@ public class enemyBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             float extraTime = Random.Range(1f, 3f);
-            Debug.Log(gameObject.name + " is waiting an extra " + extraTime.ToString());
+            // Debug.Log(gameObject.name + " is waiting an extra " + extraTime.ToString());
             yield return new WaitForSeconds(extraTime);
             GameObject shuriken = (GameObject) GameObject.Instantiate(shurikenPrefab, transform.position + transform.forward, transform.rotation);
         }

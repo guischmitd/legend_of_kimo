@@ -7,13 +7,14 @@ public class Player : MonoBehaviour
     public Controls controls;
     Vector2 moveDirection;
     Vector3 inputDirection;
-    float jump;
     public bool onGround;
     public int playerHP;
     public float maxSpeed;
     public float moveAcc;
     public float airControlCoefficient;
     public float jumpForce;
+    public int extraJumps;
+    public int maxExtraJumps;
     public float gravityMultiplier;
 
     CharacterController controller;
@@ -30,14 +31,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody>();
     }
     
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Debug.Log(moveDirection);
         // inputDirection = Vector3.Lerp(inputDirection, new Vector3(moveDirection.x, 0, moveDirection.y), Time.deltaTime * 10f);
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight =  Camera.main.transform.right;
@@ -45,16 +44,19 @@ public class Player : MonoBehaviour
         cameraRight.y = 0;
 
         inputDirection = cameraForward * moveDirection.y + cameraRight * moveDirection.x;
-        Move(inputDirection);
-        if (rb.velocity.y < -0.05f) 
+        if (rb.velocity.y < -0.1f) 
         {
-            rb.AddForce(Vector3.down * gravityMultiplier);
+            rb.AddForce(Vector3.down * gravityMultiplier * Time.deltaTime);
         }
+        Move(inputDirection);
+        Vector3 planarVelocity = Vector3.ClampMagnitude(new Vector3(rb.velocity.x, 0f, rb.velocity.z), maxSpeed);
+        rb.velocity = planarVelocity + new Vector3(0f, rb.velocity.y, 0f);
     }
 
     void Move(Vector3 desiredDirection)
     {
         Vector3 movement = new Vector3();
+        
         if (onGround)
         {
             movement.Set(desiredDirection.x, 0, desiredDirection.z);
@@ -63,31 +65,22 @@ public class Player : MonoBehaviour
             movement.Set(desiredDirection.x, 0, desiredDirection.z);
             movement *= moveAcc * airControlCoefficient;
         }
-
-        movement = Vector3.Lerp(movement, Vector3.zero, rb.velocity.magnitude / maxSpeed);
-        rb.AddForce(movement);
+        Debug.DrawRay(transform.position, movement, Color.green);
+        Debug.DrawRay(transform.position, rb.velocity, Color.red);
+        float projectedVelocity = Vector3.Dot(rb.velocity, movement.normalized);
+        
+        if (projectedVelocity < maxSpeed){
+            Debug.Log("Force added " + movement.ToString());
+            rb.AddForce(movement);
+        }
     }
 
     void Jump()
     {
-        if (onGround)
+        if (extraJumps > 0)
         {
+            extraJumps--;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            onGround = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Ground")
-        {
-            onGround = true;
-        }
-    }
-    void OnCollisionExit(Collision col)
-    {
-        if (col.gameObject.tag == "Ground")
-        {
             onGround = false;
         }
     }
@@ -100,5 +93,14 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            extraJumps = maxExtraJumps;
+            onGround = true;
+        }
     }
 }

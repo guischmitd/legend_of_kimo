@@ -28,7 +28,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""21b92b31-5b62-4127-bf5f-79cd5a12a20d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -94,9 +94,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""4fdeb629-c425-4d7f-b9a8-6dafacf31eec"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": true,

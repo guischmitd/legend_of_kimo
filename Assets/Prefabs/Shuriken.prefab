@@ -123,7 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc16e2a88a204c04ca794a43656f4a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
+  splashPrefab: {fileID: 5055921727405120038, guid: e96630002645d8844ae7d0486f6c0e89,
+    type: 3}
 --- !u!96 &4588538286849998332
 TrailRenderer:
   serializedVersion: 2

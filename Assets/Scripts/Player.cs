@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
         float projectedVelocity = Vector3.Dot(rb.velocity, movement.normalized);
         
         if (projectedVelocity < maxSpeed){
-            Debug.Log("Force added " + movement.ToString());
             rb.AddForce(movement);
         }
     }
@@ -95,12 +94,20 @@ public class Player : MonoBehaviour
         controls.Disable();
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ground")
         {
             extraJumps = maxExtraJumps;
             onGround = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            onGround = false;
         }
     }
 }

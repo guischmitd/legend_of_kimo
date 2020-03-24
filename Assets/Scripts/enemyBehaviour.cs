@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyBehaviour : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
     public GameObject shurikenPrefab;
     public bool isAggro;

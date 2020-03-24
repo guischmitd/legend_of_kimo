@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class ParticleBehaviour : MonoBehaviour
 {
-    public GameObject shurikenPrefab;
-    List<GameObject> spawnedShuriken;
-
+    ParticleSystem particle;
     // Start is called before the first frame update
     void Start()
     {
-        
+        particle = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        Destroy(col.gameObject);
+        if (particle.isStopped)
+        {
+            Destroy(gameObject);
+        }
     }
 }

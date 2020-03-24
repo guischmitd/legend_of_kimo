@@ -264,7 +264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350186844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.65, z: 0}
+  m_LocalPosition: {x: 6.79, y: 3.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -284,13 +284,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onGround: 0
   playerHP: 3
-  maxSpeed: 20
-  moveAcc: 20
-  airControlCoefficient: 0.25
-  jumpForce: 8
+  maxSpeed: 12
+  moveAcc: 50
+  airControlCoefficient: 0.5
+  jumpForce: 16
   extraJumps: 1
-  maxExtraJumps: 1
-  gravityMultiplier: 100
+  maxExtraJumps: 2
+  gravityMultiplier: 3000
 --- !u!96 &350186851
 TrailRenderer:
   serializedVersion: 2
@@ -711,7 +711,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &884363045
 BoxCollider:
@@ -1131,7 +1131,7 @@ PrefabInstance:
     - target: {fileID: 8545962015373651329, guid: 7faf68b5de1b834458a971cb318f6f83,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8545962015373651329, guid: 7faf68b5de1b834458a971cb318f6f83,
         type: 3}

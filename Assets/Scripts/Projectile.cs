@@ -27,13 +27,13 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Player player = other.gameObject.GetComponent<Player>();
-            
-            if (!player.onGround)
+            Rigidbody playerRb = other.gameObject.GetComponent<Rigidbody>();
+            if ((player.transform.position.y - transform.position.y) > .6f)
             {
                 Debug.Log("Kimo's on top!");
                 player.GetComponent<Rigidbody>().AddForce(Vector3.up * player.jumpForce / 2, ForceMode.Impulse);
-                player.GetComponent<Player>().extraJumps = player.GetComponent<Player>().maxExtraJumps;
-                moveDirection *= -1f;
+                player.extraJumps = player.maxExtraJumps;
+                moveDirection = new Vector3(- playerRb.velocity.x, moveDirection.y, - playerRb.velocity.z).normalized;
             } else {
                 GameObject.Instantiate(splashPrefab, transform.position, Quaternion.LookRotation(transform.position - other.transform.position));
                 other.gameObject.GetComponent<Player>().playerHP--;

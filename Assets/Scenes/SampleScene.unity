@@ -1078,7 +1078,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kimo
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2791232922423956050, guid: 8e17a671caefabc4ba2d4a7ed3eaa69b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8e17a671caefabc4ba2d4a7ed3eaa69b, type: 3}
 --- !u!1001 &8545962016020233016
 PrefabInstance:

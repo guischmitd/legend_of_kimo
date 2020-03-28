@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public int extraJumps;
     public int maxExtraJumps;
     public float gravityMultiplier;
+    TimeController timeController;
     void Awake()
     {
         controls = new Controls();

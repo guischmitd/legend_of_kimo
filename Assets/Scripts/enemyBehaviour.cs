@@ -6,6 +6,8 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public GameObject shurikenPrefab;
     public bool isAggro;
+    public float minTime;
+    public float maxTime;
     public GameObject player;
     // Start is called before the first frame update
     void Awake()
@@ -25,7 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
         while (isAggro) 
         {
             yield return new WaitForSeconds(1f);
-            float extraTime = Random.Range(1f, 3f);
+            float extraTime = Random.Range(minTime, maxTime);
             // Debug.Log(gameObject.name + " is waiting an extra " + extraTime.ToString());
             yield return new WaitForSeconds(extraTime);
             GameObject shuriken = (GameObject) GameObject.Instantiate(shurikenPrefab, transform.position + transform.forward, transform.rotation);

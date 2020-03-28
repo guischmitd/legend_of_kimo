@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Controls controls;
+    // Internals
+    Controls controls;
     Vector2 moveDirection;
     Vector3 inputDirection;
-    public bool onGround;
+    Rigidbody rb;
     public int playerHP;
+
+    // Movement
     public float maxSpeed;
     public float moveAcc;
     public float airControlCoefficient;
+    
+    // Jumping
+    public bool onGround;
     public float jumpForce;
     public int extraJumps;
     public int maxExtraJumps;
     public float gravityMultiplier;
-
-    CharacterController controller;
-
-    Rigidbody rb;
     void Awake()
     {
-        controller = GetComponent<CharacterController>();
         controls = new Controls();
         controls.Player.Move.performed += ctx => moveDirection = ctx.ReadValue<Vector2>();
         controls.Player.Jump.performed  += ctx => Jump();
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
         cameraRight.y = 0;
 
         inputDirection = cameraForward * moveDirection.y + cameraRight * moveDirection.x;
-        if (rb.velocity.y < -0.1f) 
+        if (rb.velocity.y < -0.1f)
         {
             rb.AddForce(Vector3.down * gravityMultiplier * Time.deltaTime);
         }
@@ -94,20 +95,20 @@ public class Player : MonoBehaviour
         controls.Disable();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Projectile")
         {
-            extraJumps = maxExtraJumps;
-            onGround = true;
+            // Time.timeScale = .1f;
+            Debug.DrawRay(other.transform.position, moveDirection.normalized, Color.red);
         }
     }
-
+    
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Projectile")
         {
-            onGround = false;
+            // Time.timeScale = 1.0f;
         }
     }
 }

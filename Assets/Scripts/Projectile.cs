@@ -19,12 +19,10 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, transform.forward, Color.green, Time.deltaTime);
-        Debug.DrawRay(transform.position, Vector3.forward, Color.red, Time.deltaTime);
         rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -33,7 +31,8 @@ public class Projectile : MonoBehaviour
             if (!player.onGround)
             {
                 Debug.Log("Kimo's on top!");
-                player.GetComponent<Rigidbody>().AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * player.jumpForce / 2, ForceMode.Impulse);
+                player.GetComponent<Player>().extraJumps = player.GetComponent<Player>().maxExtraJumps;
                 moveDirection *= -1f;
             } else {
                 GameObject.Instantiate(splashPrefab, transform.position, Quaternion.LookRotation(transform.position - other.transform.position));

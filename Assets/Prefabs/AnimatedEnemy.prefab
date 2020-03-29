@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 9004559172509379448}
   - component: {fileID: 7418696532293401320}
   m_Layer: 0
-  m_Name: Frisbee Throw
+  m_Name: AnimatedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,9 +407,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shurikenPrefab: {fileID: 1560316774748792266, guid: ad5649bf327a9c94392a8a804160e755,
     type: 3}
-  isAggro: 1
-  minTime: 0
-  maxTime: 0
+  isAggro: 0
+  minTime: 0.6
+  maxTime: 2
   player: {fileID: 0}
 --- !u!1 &4792621088634744171
 GameObject:

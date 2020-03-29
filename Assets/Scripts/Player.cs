@@ -79,8 +79,6 @@ public class Player : MonoBehaviour
         if (projectedVelocity < maxSpeed){
             rb.AddForce(movement);
         }
-
-        animator.Play("Running");
     }
 
     public void Jump()
@@ -91,7 +89,6 @@ public class Player : MonoBehaviour
             extraJumps--;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
-            animator.Play("Jumping");
         }
     }
 

@@ -201,7 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea2d7efea5a4114283a91e330ce61a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shurikenPrefab: {fileID: 7727519245293234563, guid: 5636592bc005e3c4c9b635f65bde7f5e,
+  shurikenPrefab: {fileID: 1560316774748792266, guid: ad5649bf327a9c94392a8a804160e755,
     type: 3}
   isAggro: 1
+  minTime: 0
+  maxTime: 0
   player: {fileID: 0}

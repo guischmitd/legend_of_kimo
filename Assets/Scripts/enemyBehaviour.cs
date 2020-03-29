@@ -26,11 +26,11 @@ public class EnemyBehaviour : MonoBehaviour
     {
         while (isAggro) 
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
             float extraTime = Random.Range(minTime, maxTime);
             // Debug.Log(gameObject.name + " is waiting an extra " + extraTime.ToString());
             yield return new WaitForSeconds(extraTime);
-            GameObject shuriken = (GameObject) GameObject.Instantiate(shurikenPrefab, transform.position + transform.forward, transform.rotation);
+            GameObject shuriken = (GameObject) GameObject.Instantiate(shurikenPrefab, transform.position + transform.forward + transform.up * 0.5f, transform.rotation);
         }
     }
 }

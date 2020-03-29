@@ -22,7 +22,10 @@ public class Player : MonoBehaviour
     public int extraJumps;
     public int maxExtraJumps;
     public float gravityMultiplier;
-    TimeController timeController;
+
+    // Animation
+    Animator animator;
+
     void Awake()
     {
         controls = new Controls();
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
     
     // Update is called once per frame
@@ -57,6 +61,7 @@ public class Player : MonoBehaviour
 
     void Move(Vector3 desiredDirection)
     {
+        transform.LookAt(transform.position + desiredDirection);
         Vector3 movement = new Vector3();
         
         if (onGround)
@@ -74,15 +79,19 @@ public class Player : MonoBehaviour
         if (projectedVelocity < maxSpeed){
             rb.AddForce(movement);
         }
+
+        animator.Play("Running");
     }
 
-    void Jump()
+    public void Jump()
     {
         if (extraJumps > 0)
         {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             extraJumps--;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
+            animator.Play("Jumping");
         }
     }
 

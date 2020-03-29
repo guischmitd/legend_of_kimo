@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
+    Animation animation;
     public float speed;
     public GameObject splashPrefab;
     Vector3 moveDirection;
@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         moveDirection = transform.forward;
+        animation = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -28,10 +29,12 @@ public class Projectile : MonoBehaviour
         {
             Player player = other.gameObject.GetComponent<Player>();
             Rigidbody playerRb = other.gameObject.GetComponent<Rigidbody>();
-            if ((player.transform.position.y - transform.position.y) > .6f)
+            if ((player.transform.position.y - transform.position.y) > 0f)
             {
                 Debug.Log("Kimo's on top!");
-                player.GetComponent<Rigidbody>().AddForce(Vector3.up * player.jumpForce / 2, ForceMode.Impulse);
+
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+                playerRb.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
                 player.extraJumps = player.maxExtraJumps;
                 moveDirection = new Vector3(- playerRb.velocity.x, moveDirection.y, - playerRb.velocity.z).normalized;
             } else {

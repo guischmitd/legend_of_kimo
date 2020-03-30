@@ -6,8 +6,8 @@ public class Player : MonoBehaviour
 {
     // Internals
     Controls controls;
-    Vector2 moveDirection;
-    Vector3 inputDirection;
+    public Vector3 moveDirection;
+    Vector2 inputDirection;
     Rigidbody rb;
     public int playerHP;
 
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         controls = new Controls();
-        controls.Player.Move.performed += ctx => moveDirection = ctx.ReadValue<Vector2>();
+        controls.Player.Move.performed += ctx => inputDirection = ctx.ReadValue<Vector2>();
         controls.Player.Jump.performed  += ctx => Jump();
     }
 
@@ -43,18 +43,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // inputDirection = Vector3.Lerp(inputDirection, new Vector3(moveDirection.x, 0, moveDirection.y), Time.deltaTime * 10f);
+        // inputDirection = Vector3.Lerp(inputDirection, new Vector3(inputDirection.x, 0, inputDirection.y), Time.deltaTime * 10f);
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight =  Camera.main.transform.right;
         cameraForward.y = 0;
         cameraRight.y = 0;
 
-        inputDirection = cameraForward * moveDirection.y + cameraRight * moveDirection.x;
+        moveDirection = cameraForward * inputDirection.y + cameraRight * inputDirection.x;
         if (rb.velocity.y < -0.1f)
         {
             rb.AddForce(Vector3.down * gravityMultiplier * Time.deltaTime);
         }
-        Move(inputDirection);
+        Move(moveDirection);
         
         animator.SetFloat("PlanarInput", inputDirection.magnitude);
         animator.SetFloat("PlanarSpeed", new Vector3(rb.velocity.x, 0f, rb.velocity.z).magnitude / maxSpeed);
@@ -66,7 +66,11 @@ public class Player : MonoBehaviour
 
     void Move(Vector3 desiredDirection)
     {
-        transform.LookAt(transform.position + desiredDirection);
+        if (desiredDirection.sqrMagnitude > 0.01f)
+        {
+            transform.LookAt(transform.position + desiredDirection);
+        }
+        
         Vector3 movement = new Vector3();
         
         if (onGround)
@@ -113,7 +117,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Projectile")
         {
             // Time.timeScale = .1f;
-            Debug.DrawRay(other.transform.position, moveDirection.normalized, Color.red);
+            Debug.DrawRay(other.transform.position, inputDirection.normalized, Color.red);
         }
     }
     

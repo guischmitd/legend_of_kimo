@@ -11,7 +11,6 @@ public class CameraBehaviour : MonoBehaviour
     Controls controls;
     public float rotationSpeed;
     public float distance;
-    Vector3 rotationAxis;
 
     void Awake()
     {
@@ -29,8 +28,6 @@ public class CameraBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         float diff = (transform.position - player.transform.position).magnitude;
-        
-        Debug.Log(rotationAxis);
         // transform.LookAt(player.transform.position);
         // transform.RotateAround(player.transform.position, new Vector3(0f, moveCameraInput.x, 0f), rotationSpeed * Time.deltaTime);
         // transform.Rotate(new Vector3(- moveCameraInput.y, 0f, 0f));

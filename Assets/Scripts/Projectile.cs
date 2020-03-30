@@ -36,7 +36,8 @@ public class Projectile : MonoBehaviour
                 playerRb.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
                 player.extraJumps = player.maxExtraJumps;
                 moveDirection = new Vector3(- playerRb.velocity.x, moveDirection.y, - playerRb.velocity.z).normalized;
-                transform.LookAt(moveDirection);
+                
+                transform.LookAt(transform.position + moveDirection);
                 fire.SetActive(true);
             } else {
                 GameObject.Instantiate(splashPrefab, transform.position, Quaternion.LookRotation(transform.position - other.transform.position));

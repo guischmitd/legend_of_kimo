@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: 8d0044b26235b344494dc9b0b6f10f4a
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 232132998, guid: 89816876ca3c84f4381bb81607cfdd4c, type: 3}
+  sharedProperties:
+    _importCameras: 1
+    _importLights: 1
+    _updateMaterials: 0
+    _legacyAnimationComponents: 1
+    _generateLightmapUV: 0
+    _lightmapUnwrapHardAngle: 88
+    _lightmapUnwrapPackMargin: 64
+    _lightmapUnwrapAngleError: 8
+    _lightmapUnwrapAreaError: 15
+    _modelledUnitInt: 0
+    _customScale: 1
+    _layoutInt: 0
+    _logHints: 1
+    _logWarnings: 1
+    _logErrors: 1
+    _showDialogForRelativeTexturePaths: 1
+  _useGlobalSettings: 0
+  _boneSelection:
+  - mixamorig_Hips
+  - mixamorig_Spine
+  - mixamorig_Spine1
+  - mixamorig_Spine2
+  - mixamorig_Neck
+  - mixamorig_Head
+  - mixamorig_HeadTop_End
+  - mixamorig_LeftShoulder
+  - mixamorig_LeftArm
+  - mixamorig_LeftForeArm
+  - mixamorig_LeftHand
+  - mixamorig_RightShoulder
+  - mixamorig_RightArm
+  - mixamorig_RightForeArm
+  - mixamorig_RightHand
+  - mixamorig_LeftUpLeg
+  - mixamorig_LeftLeg
+  - mixamorig_LeftFoot
+  - mixamorig_LeftToeBase
+  - mixamorig_LeftToe_End
+  - mixamorig_RightUpLeg
+  - mixamorig_RightLeg
+  - mixamorig_RightFoot
+  - mixamorig_RightToeBase
+  - mixamorig_RightToe_End

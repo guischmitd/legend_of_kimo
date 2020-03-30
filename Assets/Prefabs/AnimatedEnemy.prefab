@@ -351,8 +351,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 659335567484638947}
-  - component: {fileID: 9004559172509379448}
   - component: {fileID: 7418696532293401320}
+  - component: {fileID: 5462864584929495057}
   m_Layer: 0
   m_Name: AnimatedEnemy
   m_TagString: Untagged
@@ -376,23 +376,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &9004559172509379448
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4574874284843148528}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: -203655887218126122, guid: 45cce01e4ec0c1f4d97662a1b0ed9479,
-    type: 3}
-  m_Animations:
-  - {fileID: -203655887218126122, guid: 45cce01e4ec0c1f4d97662a1b0ed9479, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
 --- !u!114 &7418696532293401320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,10 +390,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shurikenPrefab: {fileID: 1560316774748792266, guid: ad5649bf327a9c94392a8a804160e755,
     type: 3}
-  isAggro: 0
+  animator: {fileID: 0}
+  isAggro: 1
   minTime: 0.6
   maxTime: 2
   player: {fileID: 0}
+--- !u!95 &5462864584929495057
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4574874284843148528}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0393867a21ccd5240a77b0057e28b53f, type: 3}
+  m_Controller: {fileID: 9100000, guid: e0e2d15eca0f23e428a73851e8326bb5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4792621088634744171
 GameObject:
   m_ObjectHideFlags: 0

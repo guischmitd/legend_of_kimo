@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    Animation animation;
     public float speed;
     public GameObject splashPrefab;
+    public GameObject fire;
     Vector3 moveDirection;
     Rigidbody rb;
     // Start is called before the first frame update
@@ -14,7 +14,6 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         moveDirection = transform.forward;
-        animation = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -37,6 +36,8 @@ public class Projectile : MonoBehaviour
                 playerRb.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
                 player.extraJumps = player.maxExtraJumps;
                 moveDirection = new Vector3(- playerRb.velocity.x, moveDirection.y, - playerRb.velocity.z).normalized;
+                transform.LookAt(moveDirection);
+                fire.SetActive(true);
             } else {
                 GameObject.Instantiate(splashPrefab, transform.position, Quaternion.LookRotation(transform.position - other.transform.position));
                 other.gameObject.GetComponent<Player>().playerHP--;

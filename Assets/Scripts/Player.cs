@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
         Move(inputDirection);
         
         animator.SetFloat("PlanarInput", inputDirection.magnitude);
+        animator.SetFloat("PlanarSpeed", new Vector3(rb.velocity.x, 0f, rb.velocity.z).magnitude / maxSpeed);
         animator.SetBool("Falling", (rb.velocity.y < -0.1f));
 
         Vector3 planarVelocity = Vector3.ClampMagnitude(new Vector3(rb.velocity.x, 0f, rb.velocity.z), maxSpeed);

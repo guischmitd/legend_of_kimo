@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public float gravityMultiplier;
 
     // Animation
-    Animator animator;
+    public Animator animator;
 
     void Awake()
     {
@@ -55,6 +55,10 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector3.down * gravityMultiplier * Time.deltaTime);
         }
         Move(inputDirection);
+        
+        animator.SetFloat("PlanarInput", inputDirection.magnitude);
+        animator.SetBool("Falling", (rb.velocity.y < -0.1f));
+
         Vector3 planarVelocity = Vector3.ClampMagnitude(new Vector3(rb.velocity.x, 0f, rb.velocity.z), maxSpeed);
         rb.velocity = planarVelocity + new Vector3(0f, rb.velocity.y, 0f);
     }
@@ -87,6 +91,7 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             extraJumps--;
+            animator.SetBool("Jumping", true);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
         }

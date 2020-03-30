@@ -24,6 +24,7 @@ public class OnGroundDetector : MonoBehaviour
         {
             player.extraJumps = player.maxExtraJumps;
             player.onGround = true;
+            player.animator.SetBool("Jumping", false);
         }
     }
 
@@ -32,6 +33,7 @@ public class OnGroundDetector : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             player.onGround = false;
+            player.animator.SetBool("Jumping", true);
         }
     }
 }

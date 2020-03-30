@@ -469,10 +469,11 @@ MonoBehaviour:
   moveAcc: 80
   airControlCoefficient: 0.5
   onGround: 0
-  jumpForce: 16
+  jumpForce: 10
   extraJumps: 1
   maxExtraJumps: 2
   gravityMultiplier: 3000
+  animator: {fileID: 0}
 --- !u!95 &1563221849
 Animator:
   serializedVersion: 3
